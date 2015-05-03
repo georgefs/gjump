@@ -86,7 +86,7 @@ function jump {
     *)
 
         if [ $1 ] ; then
-            line=`tac $JUMP_HISTORY_FILE|cat -n|tac|grep $1|awk '{print $1}'|head -n 1`
+            line=`tac $JUMP_HISTORY_FILE|cat -n|tac|grep $1|awk '{print length, $1}'|sort -n|awk '{print $2}'|head -n 1`
             if [[ $line =~ '^[0-9]+$' ]] ; then
                 JUMP_POINT=$line    
             else
