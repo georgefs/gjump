@@ -36,5 +36,5 @@ usage
 2. **jp**  goto early path
 3. **jn**  goto last path
 4. **j {{ number }}**  goto list number path
-5. **j {{ keyword }} ** jump to match keyword 
+5. **j {{ keyword }}** jump to match keyword 
 6. **j clean**  clean jump history list
