@@ -4,30 +4,23 @@ gjump is autpjump simple way let you jump to early path or back path
 
 install
 ---
+download
 ```
 git clone https://github.com/georgefs/gjump.git
-
-cd gjump
-./setup install
-
 ```
-or
 
-you add gjump.sh into your bashrc
+add gjump.sh into your bashrc
+
+~/.bashrc or others
 ```
+....
 source /path_to/gjump.sh
 ```
 
 
-unubstall
----
-```
-./setup uninstall
-```
-
 demo
 ---
-[youtube](http://www.youtube.com/watch?v=RRlgwGxWY2U)
+[asciinema](https://asciinema.org/a/19608)
 
 
 usage
@@ -37,4 +30,4 @@ usage
 3. **jn**  goto last path
 4. **j {{ number }}**  goto list number path
 5. **j {{ keyword }}** jump to match keyword 
-6. **j clean**  clean jump history list
+6. **j clear**  clean jump history list

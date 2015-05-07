@@ -53,7 +53,7 @@ function jump {
         echo "$JUMP_TABLE"|sed -e "s/^\s*$JUMP_POINT\s\+.*$/$COLOR&$COLOR_END/"|more
         return
     ;;
-    "clean")
+    "clear")
     #remove jump list
         rm $JUMP_HISTORY_FILE && touch $JUMP_HISTORY_FILE
         jump_log
