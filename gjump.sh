@@ -35,7 +35,8 @@ function jump_cd {
 }
 
 function jump {
-    JUMP_POINT=$(tac $JUMP_HISTORY_FILE|cat -n|tac|awk '{if($2=="'`pwd`'"){print $1}}')
+    JUMP_TABLE=`tac $JUMP_HISTORY_FILE|cat -n|tac`
+    JUMP_POINT=$(echo "$JUMP_TABLE"|awk '{if($2=="'`pwd`'"){print $1}}')
 
     if [ ! -z "${num##*[!0-9]*}" ] ; then
         jump_log
@@ -49,7 +50,7 @@ function jump {
         return
     ;;
     "list")
-        tac $JUMP_HISTORY_FILE|cat -n|tac|sed -e "s/^\s*$JUMP_POINT\s\+.*$/$COLOR&$COLOR_END/"|more
+        echo "$JUMP_TABLE"|sed -e "s/^\s*$JUMP_POINT\s\+.*$/$COLOR&$COLOR_END/"|more
         return
     ;;
     "clean")
@@ -86,7 +87,7 @@ function jump {
     *)
 
         if [ $1 ] ; then
-            line=`tac $JUMP_HISTORY_FILE|cat -n|tac|grep $1|awk '{print length, $1}'|sort -n|awk '{print $2}'|head -n 1`
+            line=`echo "$JUMP_TABLE"|grep $1|awk '{print length, $1}'|sort -n|awk '{print $2}'|head -n 1`
             if [[ $line =~ '^[0-9]+$' ]] ; then
                 JUMP_POINT=$line    
             else
