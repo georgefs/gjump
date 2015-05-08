@@ -10,6 +10,7 @@
 JUMP_HISTORY_FILE=/tmp/$USER.jumplist
 JUMP_POINT=0
 JUMP_FLAG=0
+LIST_RANGE=5
 ##  https://zipizap.wordpress.com/2011/09/28/quick-bash-colors/
 COLOR='[41m[37m'
 COLOR_END='[0m'
@@ -50,7 +51,12 @@ function jump {
         return
     ;;
     "list")
-        echo "$JUMP_TABLE"|sed -e "s/^\s*$JUMP_POINT\s\+.*$/$COLOR&$COLOR_END/"|more
+        LIST=`echo "$JUMP_TABLE"|sed -e "s/^\s*$JUMP_POINT\s\+.*$/$COLOR&$COLOR_END/"|more`
+        if [ $2 ] ; then
+            echo "$LIST"|tail -n $(($2 + $JUMP_POINT))|head -n $(($2 + $2 + 1))
+        else
+            echo "$LIST"
+        fi
         return
     ;;
     "clear")
@@ -95,15 +101,15 @@ function jump {
             fi
         fi
     ;;
-    *)
-        jump list
-        return
-    ;;
-
     esac
     JUMP_PATH=`cat $JUMP_HISTORY_FILE|tail -n$JUMP_POINT|head -n1`
     \cd $JUMP_PATH
-    jump list
+    if [ -z "$1" ]; then
+        jump list
+    else
+        jump list $LIST_RANGE
+
+    fi
 }
 
 alias cd='jump_cd'
